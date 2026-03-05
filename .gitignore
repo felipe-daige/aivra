@@ -28,3 +28,12 @@ Homestead.json
 .env.production
 .phpactor.json
 auth.json
+
+
+# AI tools and IDE settings
+.cursor/
+.claude/
+.gemini/
+.ai/
+.idea/
+.vscode/
