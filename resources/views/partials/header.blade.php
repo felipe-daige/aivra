@@ -132,22 +132,30 @@
       const produtosChevron = document.getElementById('produtos-chevron');
 
       if (produtosWrapper && produtosDropdown) {
-        produtosWrapper.addEventListener('mouseenter', () => {
+        let hideTimer;
+
+        function showDropdown() {
+          clearTimeout(hideTimer);
           produtosDropdown.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
           produtosDropdown.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
           if (produtosChevron) {
             produtosChevron.style.transform = 'rotate(180deg)';
             produtosChevron.style.transition = 'transform 0.2s';
           }
-        });
+        }
 
-        produtosWrapper.addEventListener('mouseleave', () => {
-          produtosDropdown.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
-          produtosDropdown.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-          if (produtosChevron) {
-            produtosChevron.style.transform = 'rotate(0deg)';
-          }
-        });
+        function hideDropdown() {
+          hideTimer = setTimeout(() => {
+            produtosDropdown.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+            produtosDropdown.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            if (produtosChevron) produtosChevron.style.transform = 'rotate(0deg)';
+          }, 120);
+        }
+
+        produtosWrapper.addEventListener('mouseenter', showDropdown);
+        produtosWrapper.addEventListener('mouseleave', hideDropdown);
+        produtosDropdown.addEventListener('mouseenter', showDropdown);
+        produtosDropdown.addEventListener('mouseleave', hideDropdown);
       }
     });
   </script>
