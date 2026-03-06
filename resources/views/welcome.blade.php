@@ -561,7 +561,7 @@
       <div class="relative z-10 flex flex-col gap-6">
         <!-- Top Row - Left Scroll -->
         <div class="flex overflow-hidden group shrink-0">
-          <div class="flex shrink-0 animate-marquee-left group-hover:[animation-play-state:paused] w-max">
+          <div id="squad-marquee-top" class="flex shrink-0 animate-marquee-left group-hover:[animation-play-state:paused] w-max">
             <!-- Array duplicated 2 times for smooth loop -->
             <div class="flex gap-6 pr-6 shrink-0">
               <div class="w-[320px] md:w-[400px] shrink-0 bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-gray-100 transition-transform hover:-translate-y-1">
@@ -667,7 +667,7 @@
 
         <!-- Bottom Row - Right Scroll -->
         <div class="flex overflow-hidden group shrink-0">
-          <div class="flex shrink-0 animate-marquee-right group-hover:[animation-play-state:paused] w-max">
+          <div id="squad-marquee-bottom" class="flex shrink-0 animate-marquee-right group-hover:[animation-play-state:paused] w-max">
             <!-- Array duplicated 2 times for smooth loop -->
             <div class="flex gap-6 pr-6 shrink-0">
               <div class="w-[320px] md:w-[400px] shrink-0 bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-gray-100 transition-transform hover:-translate-y-1">
@@ -1362,6 +1362,47 @@
         card.style.setProperty('--mouse-y', `${y}px`);
       });
     });
+
+  // Mobile Step Marquee (direções alternadas)
+  (function () {
+    if (window.innerWidth >= 768) return;
+    const STEP = 344;  // 320px card + 24px gap
+    const CARDS = 4;   // 4 cards únicos por fileira
+
+    function stepMarquee(el, direction) {
+      if (!el) return;
+      el.classList.remove('animate-marquee-left', 'animate-marquee-right');
+      const containerWidth = el.parentElement.offsetWidth;
+      const centerOffset = (containerWidth - 320) / 2;
+      const initialTranslate = direction === 'right'
+        ? centerOffset - CARDS * STEP
+        : centerOffset;
+      el.style.transition = 'none';
+      el.style.transform = `translateX(${initialTranslate}px)`;
+      let step = 0;
+
+      setInterval(() => {
+        step++;
+        const translate = direction === 'right'
+          ? initialTranslate + step * STEP
+          : initialTranslate - step * STEP;
+        el.style.transition = 'transform 0.5s ease-in-out';
+        el.style.transform = `translateX(${translate}px)`;
+
+        if (step >= CARDS) {
+          setTimeout(() => {
+            el.style.transition = 'none';
+            el.style.transform = `translateX(${initialTranslate}px)`;
+            el.offsetHeight; // force reflow
+            step = 0;
+          }, 520);
+        }
+      }, 3500);
+    }
+
+    stepMarquee(document.getElementById('squad-marquee-top'), 'left');
+    stepMarquee(document.getElementById('squad-marquee-bottom'), 'right');
+  })();
   </script>
 </body>
 
