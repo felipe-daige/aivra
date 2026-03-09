@@ -36,7 +36,7 @@
         <!-- Left Content -->
         <div class="w-full lg:w-[60%] flex flex-col">
           <!-- Top Content -->
-          <div class="py-12 md:py-16 flex-grow flex flex-col justify-center">
+          <div class="pt-12 pb-6 md:pt-16 md:pb-8 flex-grow flex flex-col justify-center">
             <!-- Badge -->
             <div class="inline-flex items-center bg-blue-600/90 backdrop-blur-sm rounded-full p-1 pr-4 sm:pr-5 w-max mb-8 cursor-pointer hover:bg-blue-600 transition-colors max-w-full overflow-hidden border border-white/10">
               <span class="bg-blue-900 text-white text-[10px] sm:text-xs font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mr-2 sm:mr-4 whitespace-nowrap">
@@ -75,7 +75,7 @@
           </div>
 
           <!-- Stats Section -->
-          <div class="flex flex-wrap gap-6 sm:gap-8 lg:gap-16 items-center w-full py-8 border-t border-white/20">
+          <div class="flex flex-wrap gap-6 sm:gap-8 lg:gap-16 items-center w-full py-4 sm:py-6 border-t border-white/20">
             <div class="flex flex-col flex-1 min-w-[100px] lg:flex-none">
               <span class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2 tracking-tight text-shadow">
                 500+
