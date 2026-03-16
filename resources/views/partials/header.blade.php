@@ -1,5 +1,5 @@
 @php $activeNav = $activeNav ?? 'home'; @endphp
-<header id="main-header" class="fixed top-0 z-50 w-full bg-[#F8FAFC] transition-all duration-500 ease-in-out -translate-y-full">
+<header id="main-header" class="fixed top-0 z-50 w-full bg-[#F8FAFC] transition-all duration-500 ease-in-out {{ $activeNav === 'home' ? '-translate-y-full' : 'translate-y-0 shadow-sm' }}">
   <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
     <nav class="flex items-center justify-between h-20 md:h-24 relative">
       <!-- Logo -->
@@ -68,9 +68,9 @@
             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
           </svg>
         </a>
-        <a href="/contato" class="bg-[#2563EB] hover:bg-blue-700 text-white px-7 py-3 rounded-full font-semibold transition-colors shadow-sm text-[15px] ml-2">
+        <button type="button" onclick="openFunnel()" class="bg-[#2563EB] hover:bg-blue-700 text-white px-7 py-3 rounded-full font-semibold transition-colors shadow-sm text-[15px] ml-2">
           FALE CONOSCO
-        </a>
+        </button>
       </div>
 
       <!-- Mobile Menu Toggle -->

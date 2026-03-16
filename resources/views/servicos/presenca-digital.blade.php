@@ -8,8 +8,22 @@
   <meta name="description" content="A Aivra transforma sua presença digital com UI/UX estratégico, SEO técnico e performance de dados. Método A.A.Q.I. aplicado do diagnóstico ao lançamento.">
   <meta property="og:title" content="Presença Digital — UI/UX, SEO e Performance | Aivra">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ url('/servicos/presenca-digital') }}">
+  <meta property="og:url" content="{{ secure_url('/servicos/presenca-digital') }}">
   <meta property="og:description" content="Transformamos sua marca em uma máquina de aquisição de clientes com UI/UX estratégico, SEO técnico e inteligência de dados.">
+  <meta property="og:image" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:secure_url" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Aivra — Engenharia de Performance e Estratégia Digital">
+  <meta property="og:site_name" content="Aivra">
+  @if(config('services.facebook.app_id'))
+  <meta property="fb:app_id" content="{{ config('services.facebook.app_id') }}">
+  @endif
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Presença Digital — UI/UX, SEO e Performance | Aivra">
+  <meta name="twitter:description" content="Transformamos sua marca em uma máquina de aquisição de clientes com UI/UX estratégico, SEO técnico e inteligência de dados.">
+  <meta name="twitter:image" content="{{ secure_asset('aivra_linkpreview.png') }}">
 
   <!-- Styles / Scripts -->
   @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -362,8 +376,8 @@
         header.classList.remove('-translate-y-full');
         header.classList.add('translate-y-0', 'shadow-sm');
       } else {
-        header.classList.remove('translate-y-0', 'shadow-sm');
-        header.classList.add('-translate-y-full');
+        header.classList.remove('shadow-sm');
+        // não esconde — header permanece visível
       }
     });
 

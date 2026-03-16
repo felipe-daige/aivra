@@ -16,7 +16,7 @@ class StoreLeadRequest extends FormRequest
         return [
             // Campos obrigatórios (formulário de contato)
             'name'            => 'required|string|max:255',
-            'email'           => 'required|email|max:255',
+            'email'           => 'nullable|email|max:255',
             'whatsapp'        => 'required|string|max:20',
             'company'         => 'required|string|max:255',
             'main_problem'    => 'required|string|max:5000',

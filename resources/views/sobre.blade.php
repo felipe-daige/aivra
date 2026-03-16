@@ -8,8 +8,22 @@
   <meta name="description" content="Conheça a Aivra: empresa de Engenharia de Software e SaaS B2B fundada em Dourados-MS. Desenvolvemos produtos com o Método A.A.Q.I., transformando complexidade tecnológica em vantagem competitiva.">
   <meta property="og:title" content="Sobre a Aivra — Engenharia de Performance e Visão de Futuro">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ url('/sobre') }}">
+  <meta property="og:url" content="{{ secure_url('/sobre') }}">
   <meta property="og:description" content="Empresa de Engenharia de Software e SaaS B2B fundada em Dourados-MS. Método A.A.Q.I. aplicado a produtos de alto impacto.">
+  <meta property="og:image" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:secure_url" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Aivra — Engenharia de Performance e Estratégia Digital">
+  <meta property="og:site_name" content="Aivra">
+  @if(config('services.facebook.app_id'))
+  <meta property="fb:app_id" content="{{ config('services.facebook.app_id') }}">
+  @endif
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sobre a Aivra — Engenharia de Performance e Visão de Futuro">
+  <meta name="twitter:description" content="Empresa de Engenharia de Software e SaaS B2B fundada em Dourados-MS. Método A.A.Q.I. aplicado a produtos de alto impacto.">
+  <meta name="twitter:image" content="{{ secure_asset('aivra_linkpreview.png') }}">
 
   <!-- Styles / Scripts -->
   @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -391,8 +405,8 @@
         header.classList.remove('-translate-y-full');
         header.classList.add('translate-y-0', 'shadow-sm');
       } else {
-        header.classList.remove('translate-y-0', 'shadow-sm');
-        header.classList.add('-translate-y-full');
+        header.classList.remove('shadow-sm');
+        // não esconde — header permanece visível
       }
     });
 

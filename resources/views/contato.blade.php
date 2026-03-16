@@ -9,8 +9,22 @@
   <meta name="description" content="Solicite uma consultoria gratuita com a Aivra. Em 45 minutos, identificamos gargalos operacionais e entregamos um plano de automação personalizado.">
   <meta property="og:title" content="Solicite sua Consultoria — Aivra">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ url('/contato') }}">
+  <meta property="og:url" content="{{ secure_url('/contato') }}">
   <meta property="og:description" content="Consultoria estratégica gratuita. Em 45 min, diagnóstico completo dos gargalos da sua operação.">
+  <meta property="og:image" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:secure_url" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Aivra — Engenharia de Performance e Estratégia Digital">
+  <meta property="og:site_name" content="Aivra">
+  @if(config('services.facebook.app_id'))
+  <meta property="fb:app_id" content="{{ config('services.facebook.app_id') }}">
+  @endif
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Solicite sua Consultoria — Aivra">
+  <meta name="twitter:description" content="Consultoria estratégica gratuita. Em 45 min, diagnóstico completo dos gargalos da sua operação.">
+  <meta name="twitter:image" content="{{ secure_asset('aivra_linkpreview.png') }}">
 
   @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
   @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -80,10 +94,18 @@
     </section>
 
     <!-- ===== SEÇÃO 2: FORMULÁRIO (claro bg-white) ===== -->
-    <section class="bg-white py-20">
+    <section class="bg-gradient-to-b from-slate-50 to-white py-20">
       <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto">
-          <div class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+          <div class="rounded-[2rem] border border-slate-200/80 bg-white shadow-xl overflow-hidden">
+            <!-- Topo azul accent -->
+            <div class="h-1.5 bg-gradient-to-r from-blue-500 to-blue-700 w-full"></div>
+            <div class="p-8 md:p-10">
+              <!-- Header do card -->
+              <div class="mb-8">
+                <h2 class="text-xl font-bold text-slate-900">Solicite sua Consultoria</h2>
+                <p class="text-sm text-slate-500 mt-1">Preencha os campos abaixo. Responderemos em até 24h.</p>
+              </div>
 
             <!-- Estado de sucesso -->
             <div id="form-success" class="hidden flex-col items-center gap-4 py-8 text-center">
@@ -106,46 +128,71 @@
             <form id="lead-form" class="space-y-5">
               <div class="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <label class="block text-sm font-semibold text-slate-700 mb-1.5">
+                  <label class="block text-sm font-semibold text-slate-800 mb-1.5 tracking-tight">
                     Nome completo <span class="text-red-500">*</span>
                   </label>
-                  <input type="text" name="name" required placeholder="Seu nome"
-                    class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors">
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                      <i data-lucide="user" class="w-4 h-4"></i>
+                    </span>
+                    <input type="text" name="name" required placeholder="Seu nome"
+                      class="w-full rounded-xl border border-slate-200 pl-10 pr-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors">
+                  </div>
                 </div>
                 <div>
-                  <label class="block text-sm font-semibold text-slate-700 mb-1.5">
+                  <label class="block text-sm font-semibold text-slate-800 mb-1.5 tracking-tight">
                     E-mail <span class="text-red-500">*</span>
                   </label>
-                  <input type="email" name="email" required placeholder="seu@email.com"
-                    class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors">
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                      <i data-lucide="mail" class="w-4 h-4"></i>
+                    </span>
+                    <input type="email" name="email" required placeholder="seu@email.com"
+                      class="w-full rounded-xl border border-slate-200 pl-10 pr-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors">
+                  </div>
                 </div>
               </div>
 
               <div class="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <label class="block text-sm font-semibold text-slate-700 mb-1.5">
+                  <label class="block text-sm font-semibold text-slate-800 mb-1.5 tracking-tight">
                     WhatsApp <span class="text-red-500">*</span>
                   </label>
-                  <input type="tel" name="whatsapp" required placeholder="+55 (67) 9..."
-                    class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors">
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                      <i data-lucide="phone" class="w-4 h-4"></i>
+                    </span>
+                    <input type="tel" name="whatsapp" required placeholder="+55 (67) 9..."
+                      class="w-full rounded-xl border border-slate-200 pl-10 pr-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors">
+                  </div>
                 </div>
                 <div>
-                  <label class="block text-sm font-semibold text-slate-700 mb-1.5">
+                  <label class="block text-sm font-semibold text-slate-800 mb-1.5 tracking-tight">
                     Empresa <span class="text-red-500">*</span>
                   </label>
-                  <input type="text" name="company" required placeholder="Nome da empresa"
-                    class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors">
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                      <i data-lucide="building-2" class="w-4 h-4"></i>
+                    </span>
+                    <input type="text" name="company" required placeholder="Nome da empresa"
+                      class="w-full rounded-xl border border-slate-200 pl-10 pr-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors">
+                  </div>
                 </div>
               </div>
 
               <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Cargo</label>
-                <input type="text" name="role" placeholder="Seu cargo na empresa"
-                  class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors">
+                <label class="block text-sm font-semibold text-slate-800 mb-1.5 tracking-tight">Cargo</label>
+                <div class="relative">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                  </span>
+                  <input type="text" name="role" placeholder="Seu cargo na empresa"
+                    class="w-full rounded-xl border border-slate-200 pl-10 pr-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors">
+                </div>
               </div>
 
               <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">
+                <label class="block text-sm font-semibold text-slate-800 mb-1.5 tracking-tight">
                   Principal desafio da operação <span class="text-red-500">*</span>
                 </label>
                 <textarea name="main_problem" required rows="4"
@@ -154,7 +201,7 @@
               </div>
 
               <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">
+                <label class="block text-sm font-semibold text-slate-800 mb-1.5 tracking-tight">
                   O que espera alcançar com tecnologia?
                 </label>
                 <textarea name="expectation" rows="3"
@@ -163,9 +210,9 @@
               </div>
 
               <button type="submit" id="submit-btn"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-semibold text-base transition-colors flex items-center justify-center gap-2 shadow-sm">
+                class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-4 rounded-xl font-semibold text-base transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
                 <span id="btn-text" class="flex items-center gap-2">
-                  <i data-lucide="send" class="w-4 h-4"></i>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
                   Enviar Solicitação
                 </span>
                 <span id="btn-loading" class="hidden items-center gap-2">
@@ -178,6 +225,7 @@
               </button>
             </form>
 
+            </div>{{-- /p-8 md:p-10 --}}
           </div>
         </div>
       </div>
@@ -230,8 +278,8 @@
         header.classList.remove('-translate-y-full');
         header.classList.add('translate-y-0', 'shadow-sm');
       } else {
-        header.classList.remove('translate-y-0', 'shadow-sm');
-        header.classList.add('-translate-y-full');
+        header.classList.remove('shadow-sm');
+        // não esconde — header permanece visível
       }
     });
 

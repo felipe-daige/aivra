@@ -8,8 +8,22 @@
   <meta name="description" content="A Aivra integra Business Intelligence, segurança de dados e gestão fiscal para dar às empresas o controle real que precisam para escalar com previsibilidade.">
   <meta property="og:title" content="ERP Inteligente — BI, Segurança e Gestão Fiscal | Aivra">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ url('/servicos/erp-inteligente') }}">
+  <meta property="og:url" content="{{ secure_url('/servicos/erp-inteligente') }}">
   <meta property="og:description" content="Integramos Business Intelligence, segurança de dados e gestão fiscal para dar às empresas o controle real que precisam para escalar com previsibilidade.">
+  <meta property="og:image" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:secure_url" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Aivra — Engenharia de Performance e Estratégia Digital">
+  <meta property="og:site_name" content="Aivra">
+  @if(config('services.facebook.app_id'))
+  <meta property="fb:app_id" content="{{ config('services.facebook.app_id') }}">
+  @endif
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ERP Inteligente — BI, Segurança e Gestão Fiscal | Aivra">
+  <meta name="twitter:description" content="Integramos Business Intelligence, segurança de dados e gestão fiscal para escalar com previsibilidade.">
+  <meta name="twitter:image" content="{{ secure_asset('aivra_linkpreview.png') }}">
 
   <!-- Styles / Scripts -->
   @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -352,8 +366,8 @@
         header.classList.remove('-translate-y-full');
         header.classList.add('translate-y-0', 'shadow-sm');
       } else {
-        header.classList.remove('translate-y-0', 'shadow-sm');
-        header.classList.add('-translate-y-full');
+        header.classList.remove('shadow-sm');
+        // não esconde — header permanece visível
       }
     });
 

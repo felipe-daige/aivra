@@ -4,7 +4,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AIVRA</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>Aivra | Engenharia de Performance e Estratégia Digital</title>
+  <meta name="description" content="De Dourados/MS para o Brasil. Transformamos complexidade em lucro através do método A.A.Q.I. Soluções B2B robustas, automação inteligente e infraestrutura de elite.">
+  <link rel="canonical" href="https://aivratech.com.br">
+
+  {{-- Open Graph --}}
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ secure_url('/') }}">
+  <meta property="og:title" content="Aivra | Inteligência e Performance Operacional">
+  <meta property="og:description" content="Engenharia de software moderna para quem busca escala, segurança e resultados reais com o método A.A.Q.I.">
+  <meta property="og:image" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:secure_url" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Aivra — Engenharia de Performance e Estratégia Digital">
+  <meta property="og:site_name" content="Aivra">
+  @if(config('services.facebook.app_id'))
+  <meta property="fb:app_id" content="{{ config('services.facebook.app_id') }}">
+  @endif
+  <meta property="og:locale" content="pt_BR">
+
+  {{-- Twitter Card --}}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aivra — Construindo o Futuro da sua Operação">
+  <meta name="twitter:description" content="Líderes em automação inteligente e soluções B2B. Conheça nosso ecossistema: Imobify, Calzap e mais.">
+  <meta name="twitter:image" content="{{ secure_asset('aivra_linkpreview.png') }}">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.bunny.net">
@@ -38,29 +64,24 @@
           <!-- Top Content -->
           <div class="pt-12 pb-6 md:pt-16 md:pb-8 flex-grow flex flex-col justify-center">
             <!-- Badge -->
-            <div class="inline-flex items-center bg-blue-600/90 backdrop-blur-sm rounded-full p-1 pr-4 sm:pr-5 w-max mb-8 cursor-pointer hover:bg-blue-600 transition-colors max-w-full overflow-hidden border border-white/10">
-              <span class="bg-blue-900 text-white text-[10px] sm:text-xs font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mr-2 sm:mr-4 whitespace-nowrap">
-                Mais de 1000 clientes
-              </span>
-              <span class="text-white text-xs sm:text-sm font-medium flex items-center whitespace-nowrap">
-                Saiba mais <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4 ml-1"></i>
+            <div class="inline-flex items-center bg-blue-600/90 backdrop-blur-sm rounded-full px-4 py-2 w-max mb-8 cursor-pointer hover:bg-blue-600 transition-colors max-w-full overflow-hidden border border-white/10">
+              <span class="text-white text-xs sm:text-sm font-semibold whitespace-nowrap">
+                Ecossistema Tecnológico de Alta Performance
               </span>
             </div>
 
             <!-- Headline -->
             <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold text-white leading-[1.1] lg:leading-[1.05] tracking-tight mb-6 sm:mb-8 text-shadow-lg">
-              Construa o seu
+              Construa o Futuro
               <br class="hidden sm:block" />
-              Futuro com a
+              da sua Operação
               <br class="hidden sm:block" />
-              Frameblox
+              Digital com a Aivra
             </h1>
 
             <!-- Paragraph -->
             <p class="text-gray-200 text-base sm:text-lg lg:text-xl max-w-lg mb-8 sm:mb-10 leading-relaxed text-shadow">
-              Acelere o crescimento da sua empresa com nossas soluções digitais.
-              Desfrute de elementos personalizáveis e de alta qualidade para uma
-              experiência de usuário perfeita e impressionante.
+              Acelere o crescimento da sua empresa com nosso ecossistema de soluções personalizáveis, de alta performance e segurança blindada.
             </p>
 
             <!-- Buttons -->
@@ -68,7 +89,7 @@
               <button class="bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold flex items-center justify-center hover:bg-blue-500 transition-colors text-base sm:text-lg shadow-lg w-full sm:w-auto">
                 Saiba mais <i data-lucide="arrow-right" class="w-4 h-4 sm:w-5 sm:h-5 ml-2"></i>
               </button>
-              <button class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-white/20 transition-colors text-base sm:text-lg shadow-lg w-full sm:w-auto">
+              <button id="btn-fale-conosco" onclick="openFunnel()" class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-white/20 transition-colors text-base sm:text-lg shadow-lg w-full sm:w-auto">
                 Fale conosco
               </button>
             </div>
@@ -78,32 +99,375 @@
           <div class="flex flex-wrap gap-6 sm:gap-8 lg:gap-16 items-center w-full py-4 sm:py-6 border-t border-white/20">
             <div class="flex flex-col flex-1 min-w-[100px] lg:flex-none">
               <span class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2 tracking-tight text-shadow">
-                500+
+                +4
               </span>
               <span class="text-blue-200 text-xs sm:text-sm lg:text-base font-medium uppercase tracking-wider">
-                Components
+                SAAS ATIVOS
               </span>
             </div>
             <div class="flex flex-col flex-1 min-w-[100px] lg:flex-none">
               <span class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2 tracking-tight text-shadow">
-                50+
+                A.A.Q.I.
               </span>
               <span class="text-blue-200 text-xs sm:text-sm lg:text-base font-medium uppercase tracking-wider">
-                Pages
+                METODOLOGIA PRÓPRIA
               </span>
             </div>
             <div class="flex flex-col flex-1 min-w-[100px] lg:flex-none">
               <span class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2 tracking-tight text-shadow">
-                150+
+                MS
               </span>
               <span class="text-blue-200 text-xs sm:text-sm lg:text-base font-medium uppercase tracking-wider">
-                Customers
+                DOURADOS / MS
               </span>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- A.A.Q.I. Diagnose Section -->
+    <section id="aaqi-diagnose" class="relative py-20 md:py-28 overflow-hidden bg-[#020817] text-white">
+      <!-- Dark Blue Gradient Background (igual à Benefits Section) -->
+      <div class="absolute inset-0 z-0 bg-[#030712]">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-900/30 via-[#030712] to-[#030712]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-800/20 via-transparent to-transparent"></div>
+        <!-- Subtle grid overlay -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="relative z-10 max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center bg-blue-600/20 border border-blue-500/40 rounded-full px-4 py-2 mb-6">
+            <span class="text-blue-300 text-xs font-bold uppercase tracking-widest">Metodologia A.A.Q.I.</span>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">
+            Inicie sua Jornada de Alta Performance
+          </h2>
+          <p class="text-gray-300 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+            Responda 4 perguntas e receba um diagnóstico personalizado pelo método A.A.Q.I. da Aivra.
+          </p>
+        </div>
+
+        <!-- Form Card -->
+        <div id="aaqi-card" class="max-w-xl mx-auto bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8">
+
+          <!-- Progress Bar -->
+          <div class="mb-8">
+            <div class="flex justify-between text-xs text-gray-400 mb-2">
+              <span id="aaqi-step-label">Passo 1 de 4</span>
+              <span id="aaqi-step-pct">25%</span>
+            </div>
+            <div class="h-1.5 bg-white/20 rounded-full overflow-hidden">
+              <div id="aaqi-progress-bar" class="h-full bg-blue-500 rounded-full transition-all duration-500" style="width:25%"></div>
+            </div>
+          </div>
+
+          <!-- Step 1: Profile -->
+          <div id="aaqi-step-1">
+            <h3 class="text-white text-xl font-bold mb-2">Como a Aivra pode te ajudar hoje?</h3>
+            <p class="text-gray-400 text-sm mb-6">Selecione o perfil que melhor representa você.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <button onclick="aaqiSelectProfile('B2B')" class="aaqi-option-card text-left p-5 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all group" data-value="B2B">
+                <div class="text-2xl mb-3">🏢</div>
+                <div class="text-white font-semibold text-sm">Escalar minha Empresa</div>
+                <div class="text-gray-400 text-xs mt-1">B2B — Empresas e equipes</div>
+              </button>
+              <button onclick="aaqiSelectProfile('B2C')" class="aaqi-option-card text-left p-5 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all group" data-value="B2C">
+                <div class="text-2xl mb-3">👤</div>
+                <div class="text-white font-semibold text-sm">Soluções para uso Pessoal</div>
+                <div class="text-gray-400 text-xs mt-1">B2C — Pessoa física</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Vertical -->
+          <div id="aaqi-step-2" class="hidden">
+            <h3 class="text-white text-xl font-bold mb-2">Qual o seu maior desafio atual?</h3>
+            <p class="text-gray-400 text-sm mb-6">Escolha a área de maior impacto para o seu negócio.</p>
+            <div class="flex flex-col gap-3 mb-6">
+              <button onclick="aaqiSelectVertical('Gestão e Presença Digital')" class="aaqi-vertical-card text-left p-4 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all flex items-center gap-4" data-value="Gestão e Presença Digital">
+                <span class="text-2xl">📱</span>
+                <div>
+                  <div class="text-white font-semibold text-sm">Gestão e Presença Digital</div>
+                  <div class="text-gray-400 text-xs">Marca, redes sociais e alcance online</div>
+                </div>
+              </button>
+              <button onclick="aaqiSelectVertical('Controle e ERP Inteligente')" class="aaqi-vertical-card text-left p-4 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all flex items-center gap-4" data-value="Controle e ERP Inteligente">
+                <span class="text-2xl">📊</span>
+                <div>
+                  <div class="text-white font-semibold text-sm">Controle e ERP Inteligente</div>
+                  <div class="text-gray-400 text-xs">Gestão financeira, fiscal e operacional</div>
+                </div>
+              </button>
+              <button onclick="aaqiSelectVertical('Automação e IA')" class="aaqi-vertical-card text-left p-4 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all flex items-center gap-4" data-value="Automação e IA">
+                <span class="text-2xl">🤖</span>
+                <div>
+                  <div class="text-white font-semibold text-sm">Automação e IA</div>
+                  <div class="text-gray-400 text-xs">Processos automáticos, chatbots e agentes</div>
+                </div>
+              </button>
+            </div>
+            <button onclick="aaqiGoToStep(3)" id="aaqi-btn-step2" disabled class="w-full bg-blue-600 disabled:bg-white/10 disabled:text-gray-500 text-white py-3 rounded-xl font-semibold text-sm transition-all">
+              Próximo
+            </button>
+          </div>
+
+          <!-- Step 3: Qualification (B2B = team size / B2C = product) -->
+          <div id="aaqi-step-3" class="hidden">
+            <!-- B2B -->
+            <div id="aaqi-q-b2b">
+              <h3 class="text-white text-xl font-bold mb-2">Qual o tamanho da sua equipe?</h3>
+              <p class="text-gray-400 text-sm mb-6">Isso nos ajuda a recomendar a solução certa.</p>
+              <div class="grid grid-cols-3 gap-3 mb-6">
+                <button onclick="aaqiSelectQualification('1-10')" class="aaqi-qual-card p-4 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all text-center" data-value="1-10">
+                  <div class="text-white font-bold text-lg">1–10</div>
+                  <div class="text-gray-400 text-xs mt-1">colaboradores</div>
+                </button>
+                <button onclick="aaqiSelectQualification('11-50')" class="aaqi-qual-card p-4 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all text-center" data-value="11-50">
+                  <div class="text-white font-bold text-lg">11–50</div>
+                  <div class="text-gray-400 text-xs mt-1">colaboradores</div>
+                </button>
+                <button onclick="aaqiSelectQualification('50+')" class="aaqi-qual-card p-4 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all text-center" data-value="50+">
+                  <div class="text-white font-bold text-lg">50+</div>
+                  <div class="text-gray-400 text-xs mt-1">colaboradores</div>
+                </button>
+              </div>
+            </div>
+            <!-- B2C -->
+            <div id="aaqi-q-b2c" class="hidden">
+              <h3 class="text-white text-xl font-bold mb-2">Qual produto te interessa?</h3>
+              <p class="text-gray-400 text-sm mb-6">Selecione o produto Aivra de seu interesse.</p>
+              <div class="grid grid-cols-2 gap-3 mb-6">
+                <button onclick="aaqiSelectQualification('Imobify.app')" class="aaqi-qual-card p-4 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all text-center" data-value="Imobify.app">
+                  <div class="text-xl mb-1">🏠</div>
+                  <div class="text-white font-semibold text-sm">Imobify.app</div>
+                </button>
+                <button onclick="aaqiSelectQualification('calzap.com.br')" class="aaqi-qual-card p-4 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all text-center" data-value="calzap.com.br">
+                  <div class="text-xl mb-1">💬</div>
+                  <div class="text-white font-semibold text-sm">calzap.com.br</div>
+                </button>
+                <button onclick="aaqiSelectQualification('fiscaldock.com.br')" class="aaqi-qual-card p-4 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all text-center" data-value="fiscaldock.com.br">
+                  <div class="text-xl mb-1">🧾</div>
+                  <div class="text-white font-semibold text-sm">fiscaldock.com.br</div>
+                </button>
+                <button onclick="aaqiSelectQualification('botplantao')" class="aaqi-qual-card p-4 border-2 border-white/20 hover:border-blue-400 rounded-2xl transition-all text-center" data-value="botplantao">
+                  <div class="text-xl mb-1">🤖</div>
+                  <div class="text-white font-semibold text-sm">botplantao</div>
+                </button>
+              </div>
+            </div>
+            <button onclick="aaqiGoToStep(4)" id="aaqi-btn-step3" disabled class="w-full bg-blue-600 disabled:bg-white/10 disabled:text-gray-500 text-white py-3 rounded-xl font-semibold text-sm transition-all">
+              Próximo
+            </button>
+          </div>
+
+          <!-- Step 4: Contact -->
+          <div id="aaqi-step-4" class="hidden">
+            <h3 class="text-white text-xl font-bold mb-2">Quase lá! Seus dados de contato</h3>
+            <p class="text-gray-400 text-sm mb-6">Para enviarmos seu diagnóstico A.A.Q.I. personalizado.</p>
+            <div class="flex flex-col gap-4 mb-6">
+              <div>
+                <label class="text-gray-400 text-xs uppercase tracking-wider mb-1 block">Nome completo</label>
+                <input id="aaqi-name" type="text" placeholder="Seu nome completo"
+                  class="w-full bg-white/10 border border-white/20 text-white placeholder:text-gray-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-all">
+              </div>
+              <div>
+                <label class="text-gray-400 text-xs uppercase tracking-wider mb-1 block">WhatsApp</label>
+                <input id="aaqi-whatsapp" type="tel" placeholder="(99) 9 9999-9999"
+                  class="w-full bg-white/10 border border-white/20 text-white placeholder:text-gray-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-all">
+              </div>
+              <div>
+                <label class="text-gray-400 text-xs uppercase tracking-wider mb-1 block">Cidade</label>
+                <input id="aaqi-city" type="text" placeholder="Sua cidade"
+                  class="w-full bg-white/10 border border-white/20 text-white placeholder:text-gray-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-all">
+                <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                  <input id="aaqi-dourados-check" type="checkbox" class="w-4 h-4 rounded accent-blue-500" onchange="aaqiCheckDourados(this)">
+                  <span class="text-gray-400 text-xs">Sou de Dourados/MS</span>
+                </label>
+              </div>
+            </div>
+            <button onclick="aaqiSubmit()" class="w-full bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full font-bold text-sm transition-all shadow-lg shadow-blue-600/30">
+              Gerar Diagnóstico A.A.Q.I.
+            </button>
+            <p class="text-center text-gray-500 text-xs mt-4">
+              🔒 Seus dados estão protegidos pela infraestrutura de segurança da Aivra
+            </p>
+          </div>
+
+          <!-- Step 5: Success -->
+          <div id="aaqi-step-5" class="hidden text-center py-4">
+            <div class="w-16 h-16 bg-blue-600/20 border border-blue-500/40 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <div class="inline-flex items-center bg-blue-600/20 border border-blue-500/40 rounded-full px-3 py-1 mb-4">
+              <span class="text-blue-300 text-xs font-bold uppercase tracking-widest">A.A.Q.I. Ativado</span>
+            </div>
+            <h3 class="text-white text-2xl font-bold mb-3">Diagnóstico Enviado!</h3>
+            <p class="text-gray-300 text-sm leading-relaxed max-w-sm mx-auto" id="aaqi-success-msg">
+              Recebemos seu perfil e em breve nossa equipe entrará em contato com seu diagnóstico personalizado.
+            </p>
+            <div class="mt-6 p-4 bg-white/5 border border-white/10 rounded-2xl text-left" id="aaqi-summary">
+            </div>
+          </div>
+
+        </div><!-- /aaqi-card -->
+      </div><!-- /container -->
+    </section>
+
+    <script>
+    (function() {
+      var _aaqi = {
+        step: 1,
+        profile: null,
+        vertical: null,
+        qualification: null
+      };
+
+      function show(id) { document.getElementById(id).classList.remove('hidden'); }
+      function hide(id) { document.getElementById(id).classList.add('hidden'); }
+
+      function aaqiSetProgress(step) {
+        var pct = Math.round((step / 4) * 100);
+        document.getElementById('aaqi-progress-bar').style.width = pct + '%';
+        document.getElementById('aaqi-step-label').textContent = step < 5 ? 'Passo ' + step + ' de 4' : 'Concluído';
+        document.getElementById('aaqi-step-pct').textContent = step < 5 ? pct + '%' : '100%';
+        if (step >= 5) document.getElementById('aaqi-progress-bar').style.width = '100%';
+      }
+
+      window.aaqiGoToStep = function(n) {
+        for (var i = 1; i <= 5; i++) hide('aaqi-step-' + i);
+        show('aaqi-step-' + n);
+        _aaqi.step = n;
+        aaqiSetProgress(n);
+      };
+
+      window.aaqiSelectProfile = function(v) {
+        _aaqi.profile = v;
+        aaqiGoToStep(2);
+      };
+
+      window.aaqiSelectVertical = function(v) {
+        _aaqi.vertical = v;
+        document.querySelectorAll('.aaqi-vertical-card').forEach(function(c) {
+          if (c.dataset.value === v) {
+            c.classList.add('border-blue-500', 'bg-blue-600/20');
+          } else {
+            c.classList.remove('border-blue-500', 'bg-blue-600/20');
+          }
+        });
+        var btn = document.getElementById('aaqi-btn-step2');
+        btn.disabled = false;
+        btn.classList.remove('disabled:bg-white/10', 'disabled:text-gray-500');
+      };
+
+      window.aaqiSelectQualification = function(v) {
+        _aaqi.qualification = v;
+        document.querySelectorAll('.aaqi-qual-card').forEach(function(c) {
+          if (c.dataset.value === v) {
+            c.classList.add('border-blue-500', 'bg-blue-600/20');
+          } else {
+            c.classList.remove('border-blue-500', 'bg-blue-600/20');
+          }
+        });
+        var btn = document.getElementById('aaqi-btn-step3');
+        btn.disabled = false;
+        btn.classList.remove('disabled:bg-white/10', 'disabled:text-gray-500');
+        // Show correct sub-section
+        if (_aaqi.profile === 'B2B') { show('aaqi-q-b2b'); hide('aaqi-q-b2c'); }
+        else { hide('aaqi-q-b2b'); show('aaqi-q-b2c'); }
+      };
+
+      // Show correct Q sub-block on entering step 3
+      var origGoToStep = window.aaqiGoToStep;
+      window.aaqiGoToStep = function(n) {
+        origGoToStep(n);
+        if (n === 3) {
+          _aaqi.qualification = null;
+          document.querySelectorAll('.aaqi-qual-card').forEach(function(c) {
+            c.classList.remove('border-blue-500', 'bg-blue-600/20');
+          });
+          var btn3 = document.getElementById('aaqi-btn-step3');
+          btn3.disabled = true;
+          if (_aaqi.profile === 'B2B') { show('aaqi-q-b2b'); hide('aaqi-q-b2c'); }
+          else { hide('aaqi-q-b2b'); show('aaqi-q-b2c'); }
+        }
+      };
+
+      window.aaqiCheckDourados = function(el) {
+        var cityInput = document.getElementById('aaqi-city');
+        if (el.checked) { cityInput.value = 'Dourados/MS'; cityInput.disabled = true; }
+        else { cityInput.value = ''; cityInput.disabled = false; }
+      };
+
+      // WhatsApp mask
+      document.addEventListener('DOMContentLoaded', function() {
+        var wInput = document.getElementById('aaqi-whatsapp');
+        if (wInput) {
+          wInput.addEventListener('input', function(e) {
+            var v = e.target.value.replace(/\D/g, '').substring(0, 11);
+            var out = '';
+            if (v.length > 0) out = '(' + v.substring(0,2);
+            if (v.length >= 3) out += ') ' + v.substring(2,3);
+            if (v.length >= 4) out += ' ' + v.substring(3,7);
+            if (v.length >= 8) out += '-' + v.substring(7,11);
+            e.target.value = out;
+          });
+        }
+      });
+
+      window.aaqiSubmit = function() {
+        var name = document.getElementById('aaqi-name').value.trim();
+        var whatsapp = document.getElementById('aaqi-whatsapp').value.trim();
+        var city = document.getElementById('aaqi-city').value.trim();
+        if (!name || !whatsapp) { alert('Por favor, preencha nome e WhatsApp.'); return; }
+        var payload = {
+          name: name,
+          whatsapp: whatsapp,
+          company: _aaqi.profile === 'B2B' ? 'Empresa (B2B)' : 'Pessoa Física (B2C)',
+          main_problem: _aaqi.vertical || '',
+          employees: _aaqi.profile === 'B2B' ? (_aaqi.qualification || '') : '',
+          segment: _aaqi.profile === 'B2C' ? (_aaqi.qualification || '') : '',
+          expectation: city,
+          email: null
+        };
+        var csrf = document.querySelector('meta[name=csrf-token]');
+        fetch('/leads', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': csrf ? csrf.content : ''
+          },
+          body: JSON.stringify(payload)
+        }).then(function(r) {
+          if (r.ok || r.status === 201) {
+            var profileLabel = _aaqi.profile === 'B2B' ? 'Empresa (B2B)' : 'Pessoa Física (B2C)';
+            document.getElementById('aaqi-success-msg').textContent =
+              'Olá ' + name + '! Recebemos seu perfil ' + profileLabel + ' com interesse em "' + (_aaqi.vertical || 'Aivra') + '". Nossa equipe entrará em contato pelo WhatsApp em breve.';
+            var summary = document.getElementById('aaqi-summary');
+            summary.innerHTML =
+              '<p class="text-gray-400 text-xs uppercase tracking-wider mb-2">Resumo do Diagnóstico</p>' +
+              '<div class="text-sm text-gray-300 space-y-1">' +
+              '<div>📋 Perfil: <span class="text-white">' + profileLabel + '</span></div>' +
+              '<div>🎯 Desafio: <span class="text-white">' + (_aaqi.vertical || '—') + '</span></div>' +
+              (_aaqi.qualification ? '<div>🔍 ' + (_aaqi.profile === 'B2B' ? 'Equipe' : 'Produto') + ': <span class="text-white">' + _aaqi.qualification + '</span></div>' : '') +
+              (city ? '<div>📍 Cidade: <span class="text-white">' + city + '</span></div>' : '') +
+              '</div>';
+            aaqiGoToStep(5);
+          } else {
+            r.json().then(function(data) {
+              alert('Erro ao enviar: ' + (data.message || JSON.stringify(data)));
+            }).catch(function() { alert('Erro ao enviar o formulário. Tente novamente.'); });
+          }
+        }).catch(function() { alert('Erro de conexão. Verifique sua internet e tente novamente.'); });
+      };
+    })();
+    </script>
 
     <!-- Services Section -->
     <section class="py-24 bg-white font-sans">
@@ -1321,6 +1685,7 @@
     stepMarquee(document.getElementById('squad-marquee-bottom'), 'right');
   })();
   </script>
+  @include('partials.lead-funnel-modal')
 </body>
 
 </html>

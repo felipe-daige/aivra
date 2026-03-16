@@ -8,8 +8,22 @@
   <meta name="description" content="Insights do Método A.A.Q.I., IA, SaaS e performance operacional.">
   <meta property="og:title" content="Blog | Aivra">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ url('/blog') }}">
+  <meta property="og:url" content="{{ secure_url('/blog') }}">
   <meta property="og:description" content="Insights do Método A.A.Q.I., IA, SaaS e performance operacional.">
+  <meta property="og:image" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:secure_url" content="https://aivratech.com.br/aivra_linkpreview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Aivra — Engenharia de Performance e Estratégia Digital">
+  <meta property="og:site_name" content="Aivra">
+  @if(config('services.facebook.app_id'))
+  <meta property="fb:app_id" content="{{ config('services.facebook.app_id') }}">
+  @endif
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blog | Aivra — Inteligência e Performance em Pauta">
+  <meta name="twitter:description" content="Insights do Método A.A.Q.I., IA, SaaS e performance operacional.">
+  <meta name="twitter:image" content="{{ secure_asset('aivra_linkpreview.png') }}">
 
   <!-- Styles / Scripts -->
   @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -29,6 +43,48 @@
   }
   .animate-float-blob-a { animation: float-blob-a 12s ease-in-out infinite alternate; }
   .animate-float-blob-b { animation: float-blob-b 9s ease-in-out infinite alternate; }
+
+  /* Shimmer animado para o badge hero */
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+  }
+  .badge-shimmer {
+    background: linear-gradient(
+      90deg,
+      #3b82f6 0%,
+      #818cf8 40%,
+      #3b82f6 60%,
+      #6366f1 100%
+    );
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Gradient text para o título */
+  .gradient-text {
+    background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #6366f1 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Chip hover: transição suave de cor via opacity do background */
+  .quick-chip { transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+
+  /* Overlay editorial no card principal */
+  .card-overlay {
+    background: linear-gradient(to top, rgba(2,8,23,0.95) 0%, rgba(2,8,23,0.6) 45%, transparent 100%);
+  }
+
+  /* Borda lateral colorida para cards pequenos */
+  .border-cat-green  { border-left: 4px solid #4ade80; }
+  .border-cat-purple { border-left: 4px solid #a78bfa; }
+  .border-cat-blue   { border-left: 4px solid #60a5fa; }
+  .border-cat-orange { border-left: 4px solid #fb923c; }
   </style>
 
   <!-- Lucide Icons -->
@@ -43,115 +99,272 @@
 
     <!-- ===== SEÇÃO 1: HERO ===== -->
     <section class="relative overflow-hidden bg-[#F8FAFC] pt-36 lg:pt-44 pb-20">
-      <!-- Decoração de fundo -->
+
+      {{-- Camada 1: grade sutil de linhas com máscara radial --}}
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_40%,#000_60%,transparent_100%)] opacity-40"></div>
+
+      {{-- Camada 2: halo azul suave no topo --}}
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(219,234,254,0.7)_0%,transparent_70%)]"></div>
-      <div class="absolute -top-10 -right-10 w-[28rem] h-[28rem] rounded-full bg-blue-200/60 blur-3xl pointer-events-none animate-float-blob-a"></div>
-      <div class="absolute -bottom-5 -left-5 w-80 h-80 rounded-full bg-indigo-200/50 blur-3xl pointer-events-none animate-float-blob-b"></div>
+
+      {{-- Camada 3: reflexo indigo no rodapé do hero para criar profundidade --}}
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_50%_30%_at_50%_100%,rgba(199,210,254,0.35)_0%,transparent_70%)]"></div>
+
+      {{-- Blobs flutuantes: maiores e com dupla camada de blur para profundidade extra --}}
+      <div class="absolute -top-16 -right-16 w-[36rem] h-[36rem] rounded-full bg-blue-300/40 blur-[80px] pointer-events-none animate-float-blob-a"></div>
+      <div class="absolute -top-8 -right-8 w-[22rem] h-[22rem] rounded-full bg-indigo-300/30 blur-3xl pointer-events-none animate-float-blob-a"></div>
+      <div class="absolute -bottom-8 -left-8 w-96 h-96 rounded-full bg-indigo-200/50 blur-[70px] pointer-events-none animate-float-blob-b"></div>
+      <div class="absolute -bottom-2 left-8 w-56 h-56 rounded-full bg-blue-200/40 blur-2xl pointer-events-none animate-float-blob-b"></div>
 
       <div class="relative z-10 max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 text-center">
-        <!-- Badge -->
-        <div class="inline-flex items-center gap-2 text-blue-600 bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5 text-sm font-semibold mb-6">
-          <i data-lucide="rss" class="w-4 h-4"></i>
-          Blog Aivra
+
+        {{-- Badge com pill gradiente + shimmer animado --}}
+        <div class="inline-flex items-center gap-2 bg-white border border-blue-100 shadow-sm shadow-blue-100/60 rounded-full px-4 py-1.5 text-sm font-semibold mb-6">
+          {{-- Ícone em azul sólido para servir de âncora visual --}}
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600">
+            <i data-lucide="rss" class="w-3 h-3 text-white"></i>
+          </span>
+          {{-- Texto com efeito shimmer de gradiente animado --}}
+          <span class="badge-shimmer font-bold tracking-wide">Blog Aivra</span>
+          {{-- Ponto piscando para indicar conteúdo ao vivo --}}
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
         </div>
 
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-5">
-          Inteligência e Performance<br class="hidden md:block"> em Pauta
+        {{-- Título: primeira linha em slate, segunda linha em gradient text --}}
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-5">
+          <span class="text-slate-900">Inteligência e Performance</span>
+          <br class="hidden sm:block">
+          {{-- "em Pauta" recebe gradient text blue → indigo como destaque editorial --}}
+          <span class="gradient-text">em Pauta</span>
         </h1>
-        <p class="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+
+        {{-- Subtítulo: cor mais escura (slate-600 em vez de slate-500) para maior contraste WCAG --}}
+        <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
           Insights práticos do Método A.A.Q.I., tendências em IA, SaaS e como transformar operações em resultados concretos.
         </p>
 
-        <!-- Busca -->
-        <div class="max-w-lg mx-auto mb-8">
-          <div class="relative flex items-center">
-            <i data-lucide="search" class="absolute left-5 w-5 h-5 text-slate-400 pointer-events-none"></i>
+        {{-- Campo de busca: sombra pronunciada + anel de foco mais impactante --}}
+        <div class="max-w-lg mx-auto mb-10">
+          <div class="relative flex items-center group">
+            <i data-lucide="search" class="absolute left-5 w-5 h-5 text-slate-400 pointer-events-none transition-colors group-focus-within:text-blue-500"></i>
             <input
               id="blog-search"
               type="text"
               placeholder="Buscar artigos..."
-              class="w-full pl-12 pr-4 py-4 rounded-full border border-slate-200 bg-white shadow-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              class="w-full pl-12 pr-6 py-4 rounded-full border border-slate-200 bg-white
+                     shadow-[0_4px_24px_rgba(37,99,235,0.10)] text-base text-slate-800
+                     placeholder-slate-400
+                     focus:outline-none focus:ring-[3px] focus:ring-blue-500/30
+                     focus:border-blue-400 focus:shadow-[0_4px_32px_rgba(37,99,235,0.18)]
+                     transition-all duration-200"
             >
           </div>
         </div>
 
-        <!-- Chips de categoria rápida -->
+        {{-- Chips de categoria: ícones pequenos + hover com sombra colorida suave --}}
         <div class="flex flex-wrap justify-center gap-2">
-          <button class="quick-chip active-chip px-4 py-2 rounded-full text-sm font-semibold bg-[#2563EB] text-white transition-colors" data-chip="all">Todos</button>
-          <button class="quick-chip px-4 py-2 rounded-full text-sm font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors" data-chip="IA">IA</button>
-          <button class="quick-chip px-4 py-2 rounded-full text-sm font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors" data-chip="SaaS">SaaS</button>
-          <button class="quick-chip px-4 py-2 rounded-full text-sm font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors" data-chip="Cibersegurança">Cibersegurança</button>
-          <button class="quick-chip px-4 py-2 rounded-full text-sm font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors" data-chip="Performance">Performance</button>
-          <button class="quick-chip px-4 py-2 rounded-full text-sm font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors" data-chip="UI/UX">UI/UX</button>
+          {{-- Chip "Todos" — começa ativo --}}
+          <button
+            class="quick-chip active-chip inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-[#2563EB] text-white min-h-[44px]"
+            data-chip="all"
+          >
+            <i data-lucide="layout-grid" class="w-3.5 h-3.5 shrink-0"></i>
+            Todos
+          </button>
+
+          <button
+            class="quick-chip inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-300 hover:text-blue-600 hover:shadow-sm hover:shadow-blue-100 min-h-[44px]"
+            data-chip="IA"
+          >
+            <i data-lucide="cpu" class="w-3.5 h-3.5 shrink-0"></i>
+            IA
+          </button>
+
+          <button
+            class="quick-chip inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-300 hover:text-blue-600 hover:shadow-sm hover:shadow-blue-100 min-h-[44px]"
+            data-chip="SaaS"
+          >
+            <i data-lucide="cloud" class="w-3.5 h-3.5 shrink-0"></i>
+            SaaS
+          </button>
+
+          <button
+            class="quick-chip inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-300 hover:text-blue-600 hover:shadow-sm hover:shadow-blue-100 min-h-[44px]"
+            data-chip="Cibersegurança"
+          >
+            <i data-lucide="shield" class="w-3.5 h-3.5 shrink-0"></i>
+            Cibersegurança
+          </button>
+
+          <button
+            class="quick-chip inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-300 hover:text-blue-600 hover:shadow-sm hover:shadow-blue-100 min-h-[44px]"
+            data-chip="Performance"
+          >
+            <i data-lucide="zap" class="w-3.5 h-3.5 shrink-0"></i>
+            Performance
+          </button>
+
+          <button
+            class="quick-chip inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-white border border-slate-200 text-slate-700 hover:border-blue-300 hover:text-blue-600 hover:shadow-sm hover:shadow-blue-100 min-h-[44px]"
+            data-chip="UI/UX"
+          >
+            <i data-lucide="pen-tool" class="w-3.5 h-3.5 shrink-0"></i>
+            UI/UX
+          </button>
         </div>
+
       </div>
     </section>
 
     <!-- ===== SEÇÃO 2: POSTS EM DESTAQUE ===== -->
     <section class="bg-[#020817] py-24">
       <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
-        <div class="flex items-center gap-3 mb-12">
-          <span class="inline-flex items-center gap-2 text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 text-sm font-semibold">
+
+        {{-- Header da seção: pill + título com linha decorativa + contagem --}}
+        <div class="mb-12">
+          {{-- Pill badge --}}
+          <div class="inline-flex items-center gap-2 text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-4">
             <i data-lucide="star" class="w-4 h-4"></i>
             Em Destaque
-          </span>
+          </div>
+
+          {{-- Linha com título + linha decorativa + contagem de posts --}}
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div class="flex items-center gap-4">
+              {{-- Título da seção --}}
+              <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
+                Leituras essenciais
+              </h2>
+              {{-- Linha decorativa horizontal — cresce para preencher o espaço ao lado do título --}}
+              <div class="hidden md:block h-px flex-1 w-24 bg-gradient-to-r from-blue-500/60 to-transparent"></div>
+            </div>
+            {{-- Contagem de posts em destaque — derivada do array $featuredPosts --}}
+            <p class="text-gray-500 text-sm font-medium shrink-0">
+              {{ count($featuredPosts) }} {{ count($featuredPosts) === 1 ? 'artigo selecionado' : 'artigos selecionados' }}
+            </p>
+          </div>
         </div>
 
         <div class="grid lg:grid-cols-3 gap-6">
-          <!-- Card Principal -->
-          <article class="reveal-up lg:col-span-2 rounded-[2rem] overflow-hidden border border-white/10 bg-white/[0.02] hover:-translate-y-1 transition-transform flex flex-col">
-            <div class="aspect-video bg-slate-800 relative overflow-hidden shrink-0">
-              <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&h=506&fit=crop&q=80" alt="Inteligência Artificial — Método A.A.Q.I." class="w-full h-full object-cover">
-              <div class="absolute top-4 left-4">
-                <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">Performance</span>
-              </div>
-            </div>
-            <div class="p-8 flex flex-col flex-grow">
-              <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight hover:text-blue-300 transition-colors cursor-pointer">
-                A Ciência por trás do Método A.A.Q.I.
-              </h2>
-              <p class="text-gray-400 leading-relaxed mb-6 flex-grow">
-                Como uma abordagem estruturada em quatro etapas — Análise, Arquitetura, Quantização e Inteligência — está transformando operações B2B e gerando resultados mensuráveis em semanas.
-              </p>
-              <div class="flex items-center gap-4 pt-4 border-t border-white/10">
-                <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm shrink-0">F</div>
-                <div>
-                  <p class="text-white font-semibold text-sm">Felipe — CEO</p>
-                  <p class="text-gray-500 text-xs">6 mar. 2026 · 8 min de leitura</p>
+
+          {{-- Coluna principal (large) e coluna de cards menores (small) --}}
+          {{-- O primeiro $post com size='large' ocupa lg:col-span-2.         --}}
+          {{-- Os demais posts (size='small') ficam empilhados na coluna direita. --}}
+
+          @php $smallPosts = []; @endphp
+
+          @foreach ($featuredPosts as $post)
+            @if ($post['size'] === 'large')
+
+              {{-- Card principal — layout editorial: título e autor DENTRO da imagem via overlay --}}
+              <article class="reveal-up lg:col-span-2 rounded-[2rem] overflow-hidden border border-white/10 bg-white/[0.02] hover:-translate-y-1 transition-transform flex flex-col group relative">
+
+                {{-- Área da imagem com overlay editorial (fundo → transparente) --}}
+                <div class="aspect-video relative overflow-hidden shrink-0">
+                  <img
+                    src="{{ $post['image'] }}"
+                    alt="{{ $post['alt'] }}"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  >
+
+                  {{-- Overlay gradient: bottom opaco → topo transparente, estilo editorial --}}
+                  <div class="card-overlay absolute inset-0"></div>
+
+                  {{-- Badge de categoria sobre a imagem (topo esquerdo) --}}
+                  <div class="absolute top-5 left-5">
+                    <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg">{{ $post['category'] }}</span>
+                  </div>
+
+                  {{-- Título e autor dentro da imagem (rodapé do overlay) — estilo editorial --}}
+                  <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                    <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-white leading-tight mb-4 text-shadow-lg group-hover:text-blue-200 transition-colors">
+                      <a href="{{ $post['slug'] ? url('/blog/' . $post['slug']) : '#' }}" class="after:absolute after:inset-0">{{ $post['title'] }}</a>
+                    </h2>
+
+                    {{-- Info do autor + data + leitura --}}
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-full bg-blue-600 border-2 border-white/20 flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-lg">{{ $post['author_initial'] }}</div>
+                      <div>
+                        <p class="text-white font-semibold text-sm leading-none mb-0.5">{{ $post['author_name'] }}</p>
+                        <p class="text-white/60 text-xs">{{ $post['date'] }} · {{ $post['reading_time'] }}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+
+                {{-- Rodapé do card: descrição + botão CTA --}}
+                <div class="p-6 md:p-8 flex flex-col flex-grow">
+                  <p class="text-gray-400 leading-relaxed flex-grow mb-6">
+                    {{ $post['description'] }}
+                  </p>
+                  {{-- Botão "Ler artigo" estilo ghost outline — destaque sem competir com a imagem --}}
+                  <a
+                    href="{{ $post['slug'] ? url('/blog/' . $post['slug']) : '#' }}"
+                    class="relative z-10 inline-flex items-center gap-2 self-start px-5 py-2.5 rounded-full border border-white/20 text-white text-sm font-semibold hover:border-blue-400 hover:text-blue-300 hover:bg-blue-500/10 transition-all duration-200 min-h-[44px]"
+                  >
+                    Ler artigo
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </article>
+
+            @else
+              {{-- Acumula os posts pequenos para renderizar dentro da coluna direita --}}
+              @php $smallPosts[] = $post; @endphp
+            @endif
+          @endforeach
+
+          {{-- Coluna direita: cards menores empilhados --}}
+          @if (count($smallPosts) > 0)
+            <div class="lg:col-span-1 flex flex-col gap-5">
+              @foreach ($smallPosts as $index => $post)
+                {{-- Delay incremental: delay-100 para o primeiro, delay-200 para o segundo, etc. --}}
+                @php
+                  $delayClass = 'delay-' . (($index + 1) * 100);
+                  // Cor da borda lateral baseada no índice (alterna verde → roxo → azul)
+                  $borderColors = ['border-cat-green', 'border-cat-purple', 'border-cat-blue', 'border-cat-orange'];
+                  $borderClass  = $borderColors[$index % count($borderColors)];
+                  // Cor do texto da categoria sincronizada com a borda
+                  $catTextColors = ['text-green-400', 'text-purple-400', 'text-blue-400', 'text-orange-400'];
+                  $catTextClass  = $catTextColors[$index % count($catTextColors)];
+                @endphp
+
+                {{-- Card pequeno: borda colorida lateral + thumbnail maior + data --}}
+                <article class="reveal-up {{ $delayClass }} {{ $borderClass }} rounded-r-[1.5rem] rounded-l-none overflow-hidden border border-white/10 bg-white/[0.02] hover:-translate-y-1 transition-transform flex items-stretch gap-0 group relative">
+
+                  {{-- Thumbnail maior: w-24 h-24 para dar mais peso visual --}}
+                  <div class="w-24 h-24 md:w-28 md:h-28 bg-slate-800 overflow-hidden shrink-0 self-stretch">
+                    <img
+                      src="{{ $post['image'] }}"
+                      alt="{{ $post['alt'] }}"
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    >
+                  </div>
+
+                  {{-- Conteúdo textual --}}
+                  <div class="flex-1 min-w-0 p-4 flex flex-col justify-center">
+                    {{-- Categoria com cor alinhada à borda lateral --}}
+                    <span class="{{ $catTextClass }} text-xs font-bold uppercase tracking-wider">{{ $post['category'] }}</span>
+
+                    {{-- Título legível --}}
+                    <h3 class="text-white font-bold leading-snug mt-1 mb-1.5 text-sm md:text-base group-hover:text-blue-300 transition-colors">
+                      <a href="{{ $post['slug'] ? url('/blog/' . $post['slug']) : '#' }}" class="after:absolute after:inset-0">{{ $post['title'] }}</a>
+                    </h3>
+
+                    {{-- Data de publicação + tempo de leitura --}}
+                    <p class="text-gray-500 text-xs flex items-center gap-1.5">
+                      <i data-lucide="calendar" class="w-3 h-3 shrink-0"></i>
+                      {{ $post['date'] }}
+                      <span class="text-gray-700">·</span>
+                      {{ $post['reading_time'] }}
+                    </p>
+                  </div>
+                </article>
+              @endforeach
             </div>
-          </article>
+          @endif
 
-          <!-- Cards Menores -->
-          <div class="lg:col-span-1 flex flex-col gap-6">
-            <article class="reveal-up delay-100 rounded-[2rem] overflow-hidden border border-white/10 bg-white/[0.02] hover:-translate-y-1 transition-transform flex items-center gap-5 p-6">
-              <div class="w-20 h-20 rounded-2xl bg-slate-800 overflow-hidden shrink-0">
-                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=160&h=160&fit=crop&q=80" alt="calzap WhatsApp" class="w-full h-full object-cover">
-              </div>
-              <div class="flex-1 min-w-0">
-                <span class="text-green-400 text-xs font-bold uppercase tracking-wider">SaaS</span>
-                <h3 class="text-white font-bold leading-snug mt-1 mb-1 text-sm md:text-base cursor-pointer hover:text-blue-300 transition-colors">
-                  Como o calzap.com.br revoluciona o atendimento imobiliário
-                </h3>
-                <p class="text-gray-500 text-xs">5 min de leitura</p>
-              </div>
-            </article>
-
-            <article class="reveal-up delay-200 rounded-[2rem] overflow-hidden border border-white/10 bg-white/[0.02] hover:-translate-y-1 transition-transform flex items-center gap-5 p-6">
-              <div class="w-20 h-20 rounded-2xl bg-slate-800 overflow-hidden shrink-0">
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=160&h=160&fit=crop&q=80" alt="Imobify gestão imobiliária" class="w-full h-full object-cover">
-              </div>
-              <div class="flex-1 min-w-0">
-                <span class="text-purple-400 text-xs font-bold uppercase tracking-wider">SaaS</span>
-                <h3 class="text-white font-bold leading-snug mt-1 mb-1 text-sm md:text-base cursor-pointer hover:text-blue-300 transition-colors">
-                  Imobify.app: gestão de imóveis com IA integrada
-                </h3>
-                <p class="text-gray-500 text-xs">4 min de leitura</p>
-              </div>
-            </article>
-          </div>
         </div>
       </div>
     </section>
@@ -173,128 +386,58 @@
           </div>
         </div>
 
+        {{-- Mapeamento de cores para badges e avatares dos cards de artigos.
+             Definido aqui no Blade (não no PHP do controller) para que o
+             Tailwind v4 consiga escanear e incluir as classes no build final. --}}
+        @php
+        $colorMap = [
+            'orange' => ['badge' => 'bg-orange-50 text-orange-600 border border-orange-100', 'avatar' => 'bg-orange-100 text-orange-600'],
+            'blue'   => ['badge' => 'bg-blue-50 text-blue-600 border border-blue-100',       'avatar' => 'bg-blue-100 text-blue-600'],
+            'green'  => ['badge' => 'bg-green-50 text-green-600 border border-green-100',    'avatar' => 'bg-green-100 text-green-600'],
+            'purple' => ['badge' => 'bg-purple-50 text-purple-600 border border-purple-100', 'avatar' => 'bg-purple-100 text-purple-600'],
+            'red'    => ['badge' => 'bg-red-50 text-red-600 border border-red-100',          'avatar' => 'bg-red-100 text-red-600'],
+            'cyan'   => ['badge' => 'bg-cyan-50 text-cyan-600 border border-cyan-100',       'avatar' => 'bg-cyan-100 text-cyan-600'],
+        ];
+        @endphp
+
         <!-- Grade de artigos -->
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="articles-grid">
 
-          <!-- Card 1: FiscalDock -->
-          <article class="article-card reveal-up delay-100 rounded-[2rem] border border-slate-100 shadow-sm hover:-translate-y-1 transition-transform flex flex-col overflow-hidden" data-category="SaaS">
-            <div class="aspect-video bg-slate-100 relative overflow-hidden shrink-0">
-              <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=450&fit=crop&q=80" alt="Documentos fiscais — FiscalDock" class="w-full h-full object-cover">
-            </div>
-            <div class="p-7 flex flex-col flex-grow">
-              <span class="article-badge inline-block bg-orange-50 text-orange-600 border border-orange-100 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 w-fit">SaaS</span>
-              <h3 class="article-title text-lg font-bold text-slate-900 mb-3 leading-snug cursor-pointer hover:text-blue-600 transition-colors">
-                Compliance Fiscal com IA: o que é o FiscalDock?
-              </h3>
-              <p class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-2">
-                Como o fiscaldock.com.br centraliza arquivos fiscais, identifica pendências automaticamente e gera relatórios prontos para tomada de decisão.
-              </p>
-              <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
-                <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-xs shrink-0">A</div>
-                <span class="text-slate-400 text-xs">6 min de leitura</span>
-              </div>
-            </div>
-          </article>
+          @foreach ($allPosts as $post)
+            {{-- Resolve as classes de cor a partir do mapa definido acima --}}
+            @php
+              $colors = $colorMap[$post['color']] ?? $colorMap['blue'];
+            @endphp
 
-          <!-- Card 2: BotPlantão -->
-          <article class="article-card reveal-up delay-200 rounded-[2rem] border border-slate-100 shadow-sm hover:-translate-y-1 transition-transform flex flex-col overflow-hidden" data-category="Engenharia de IA">
-            <div class="aspect-video bg-slate-100 relative overflow-hidden shrink-0">
-              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=450&fit=crop&q=80" alt="Médico usando celular — BotPlantão" class="w-full h-full object-cover">
-            </div>
-            <div class="p-7 flex flex-col flex-grow">
-              <span class="article-badge inline-block bg-blue-50 text-blue-600 border border-blue-100 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 w-fit">Engenharia de IA</span>
-              <h3 class="article-title text-lg font-bold text-slate-900 mb-3 leading-snug cursor-pointer hover:text-blue-600 transition-colors">
-                Atendimento 24/7: como o BotPlantão transforma o suporte
-              </h3>
-              <p class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-2">
-                Automação que monitora grupos de WhatsApp em milissegundos e garante que médicos nunca percam uma oportunidade de plantão por indisponibilidade.
-              </p>
-              <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
-                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs shrink-0">A</div>
-                <span class="text-slate-400 text-xs">5 min de leitura</span>
+            <article
+              class="article-card reveal-up {{ $post['delay'] }} rounded-[2rem] border border-slate-100 shadow-sm hover:-translate-y-1 transition-transform flex flex-col overflow-hidden relative"
+              data-category="{{ $post['category'] }}"
+            >
+              <div class="aspect-video bg-slate-100 relative overflow-hidden shrink-0">
+                <img
+                  src="{{ $post['image'] }}"
+                  alt="{{ $post['alt'] }}"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                >
               </div>
-            </div>
-          </article>
-
-          <!-- Card 3: calzap -->
-          <article class="article-card reveal-up delay-300 rounded-[2rem] border border-slate-100 shadow-sm hover:-translate-y-1 transition-transform flex flex-col overflow-hidden" data-category="SaaS">
-            <div class="aspect-video bg-slate-100 relative overflow-hidden shrink-0">
-              <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=450&fit=crop&q=80" alt="Automação de mensagens — calzap" class="w-full h-full object-cover">
-            </div>
-            <div class="p-7 flex flex-col flex-grow">
-              <span class="article-badge inline-block bg-green-50 text-green-600 border border-green-100 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 w-fit">SaaS</span>
-              <h3 class="article-title text-lg font-bold text-slate-900 mb-3 leading-snug cursor-pointer hover:text-blue-600 transition-colors">
-                calzap: automação de WhatsApp para o mercado imobiliário
-              </h3>
-              <p class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-2">
-                Como fluxos visuais inteligentes e IA para transcrição de áudios estão recuperando vendas e automatizando o atendimento 24/7 no setor imobiliário.
-              </p>
-              <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
-                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold text-xs shrink-0">A</div>
-                <span class="text-slate-400 text-xs">7 min de leitura</span>
+              <div class="p-7 flex flex-col flex-grow">
+                {{-- Badge de categoria — classes resolvidas via $colorMap para Tailwind v4 --}}
+                <span class="article-badge inline-block {{ $colors['badge'] }} text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 w-fit">{{ $post['category'] }}</span>
+                <h3 class="article-title text-lg font-bold text-slate-900 mb-3 leading-snug cursor-pointer hover:text-blue-600 transition-colors">
+                  <a href="{{ $post['slug'] ? url('/blog/' . $post['slug']) : '#' }}" class="after:absolute after:inset-0">{{ $post['title'] }}</a>
+                </h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-2">
+                  {{ $post['description'] }}
+                </p>
+                <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                  {{-- Avatar com inicial do autor — cor derivada do mesmo mapa --}}
+                  <div class="w-8 h-8 rounded-full {{ $colors['avatar'] }} flex items-center justify-center font-bold text-xs shrink-0">{{ $post['author_initial'] }}</div>
+                  <span class="text-slate-400 text-xs">{{ $post['reading_time'] }}</span>
+                </div>
               </div>
-            </div>
-          </article>
-
-          <!-- Card 4: Imobify -->
-          <article class="article-card reveal-up delay-100 rounded-[2rem] border border-slate-100 shadow-sm hover:-translate-y-1 transition-transform flex flex-col overflow-hidden" data-category="SaaS">
-            <div class="aspect-video bg-slate-100 relative overflow-hidden shrink-0">
-              <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=450&fit=crop&q=80" alt="Gestão imobiliária — Imobify" class="w-full h-full object-cover">
-            </div>
-            <div class="p-7 flex flex-col flex-grow">
-              <span class="article-badge inline-block bg-purple-50 text-purple-600 border border-purple-100 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 w-fit">SaaS</span>
-              <h3 class="article-title text-lg font-bold text-slate-900 mb-3 leading-snug cursor-pointer hover:text-blue-600 transition-colors">
-                Imobify: a plataforma de gestão imobiliária com IA
-              </h3>
-              <p class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-2">
-                Gerencie aluguéis direto no WhatsApp com recibos automáticos, alertas de vencimento e relatórios prontos para o Imposto de Renda — tudo integrado com IA.
-              </p>
-              <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
-                <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-xs shrink-0">A</div>
-                <span class="text-slate-400 text-xs">4 min de leitura</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 5: Cibersegurança -->
-          <article class="article-card reveal-up delay-200 rounded-[2rem] border border-slate-100 shadow-sm hover:-translate-y-1 transition-transform flex flex-col overflow-hidden" data-category="Cibersegurança">
-            <div class="aspect-video bg-slate-100 relative overflow-hidden shrink-0">
-              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop&q=80" alt="Cibersegurança — Zero Trust" class="w-full h-full object-cover">
-            </div>
-            <div class="p-7 flex flex-col flex-grow">
-              <span class="article-badge inline-block bg-red-50 text-red-600 border border-red-100 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 w-fit">Cibersegurança</span>
-              <h3 class="article-title text-lg font-bold text-slate-900 mb-3 leading-snug cursor-pointer hover:text-blue-600 transition-colors">
-                Zero Trust na prática: protegendo dados da sua empresa
-              </h3>
-              <p class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-2">
-                Entenda como o modelo Zero Trust elimina suposições de confiança implícita na rede e por que ele é indispensável para empresas que escalam com tecnologia.
-              </p>
-              <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
-                <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold text-xs shrink-0">A</div>
-                <span class="text-slate-400 text-xs">9 min de leitura</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 6: A.A.Q.I. -->
-          <article class="article-card reveal-up delay-300 rounded-[2rem] border border-slate-100 shadow-sm hover:-translate-y-1 transition-transform flex flex-col overflow-hidden" data-category="Performance">
-            <div class="aspect-video bg-slate-100 relative overflow-hidden shrink-0">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop&q=80" alt="Dashboard de analytics — Método A.A.Q.I." class="w-full h-full object-cover">
-            </div>
-            <div class="p-7 flex flex-col flex-grow">
-              <span class="article-badge inline-block bg-cyan-50 text-cyan-600 border border-cyan-100 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 w-fit">Performance</span>
-              <h3 class="article-title text-lg font-bold text-slate-900 mb-3 leading-snug cursor-pointer hover:text-blue-600 transition-colors">
-                Método A.A.Q.I.: como transformar operações em resultados
-              </h3>
-              <p class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-2">
-                Um guia completo sobre como as quatro etapas do método A.A.Q.I. — Análise, Arquitetura, Quantização e Inteligência — geram crescimento previsível e escalável.
-              </p>
-              <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
-                <div class="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-600 font-bold text-xs shrink-0">F</div>
-                <span class="text-slate-400 text-xs">8 min de leitura</span>
-              </div>
-            </div>
-          </article>
+            </article>
+          @endforeach
 
         </div>
 
@@ -364,8 +507,8 @@
         header.classList.remove('-translate-y-full');
         header.classList.add('translate-y-0', 'shadow-sm');
       } else {
-        header.classList.remove('translate-y-0', 'shadow-sm');
-        header.classList.add('-translate-y-full');
+        header.classList.remove('shadow-sm');
+        // não esconde — header permanece visível
       }
     });
 
